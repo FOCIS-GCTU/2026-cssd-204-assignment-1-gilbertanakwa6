@@ -1,0 +1,90 @@
+# File: GNA.py
+# Description: This program asks the user for a date (month, day, year)
+#              and uses Zeller's Congruence to determine the day of the week.
+# Assignment Number: 3
+#
+# Name: <Gilbert Nana Anakwa>
+# SID: <2425405055>
+# Email: <2425405055@live.gctu.edu.gh>
+# Grader: <Mr Agustus Buckman>
+#
+# On my honor, <Gilbert Nana Anakwa>, this programming assignment is my own work
+# and I have not provided this code to any other student.
+
+def main():
+    # Ask the user for the month, day, and year
+    month_name = input("Enter the month (for example, January, February, etc.): ")
+    day = int(input("Enter the day (an integer): "))
+    year = int(input("Enter the year (an integer): "))
+    
+    # Convert month name to month_number for Zeller's algorithm
+    # Month numbers: Jan=13, Feb=14, Mar=3, Apr=4, May=5, Jun=6,
+    #                Jul=7, Aug=8, Sep=9, Oct=10, Nov=11, Dec=12
+    if month_name == "January":
+        month_number = 13
+    elif month_name == "February":
+        month_number = 14
+    elif month_name == "March":
+        month_number = 3
+    elif month_name == "April":
+        month_number = 4
+    elif month_name == "May":
+        month_number = 5
+    elif month_name == "June":
+        month_number = 6
+    elif month_name == "July":
+        month_number = 7
+    elif month_name == "August":
+        month_number = 8
+    elif month_name == "September":
+        month_number = 9
+    elif month_name == "October":
+        month_number = 10
+    elif month_name == "November":
+        month_number = 11
+    else:  # December
+        month_number = 12
+    
+    day_in_month = day
+    
+    # Adjust year if month is January or February
+    year_val = year
+    if month_name == "January" or month_name == "February":
+        year_val = year - 1
+    
+    # Calculate variation_in_days_per_month using floor division
+    variation_in_days_per_month = (13 * (month_number + 1)) // 5
+    
+    # Calculate leap_year_days using floor division
+    leap_year_days = (year_val // 4) + (year_val // 400)
+    
+    # Calculate century_days using floor division
+    century_days = year_val // 100
+    
+    # Calculate total_days
+    total_days = day_in_month + variation_in_days_per_month + year_val + leap_year_days - century_days
+    
+    # Calculate day_of_week (remainder when divided by 7)
+    day_of_week = total_days % 7
+    
+    # Map day_of_week number to the actual day name
+    # 0=Saturday, 1=Sunday, 2=Monday, 3=Tuesday, 4=Wednesday, 5=Thursday, 6=Friday
+    if day_of_week == 0:
+        weekday = "Saturday"
+    elif day_of_week == 1:
+        weekday = "Sunday"
+    elif day_of_week == 2:
+        weekday = "Monday"
+    elif day_of_week == 3:
+        weekday = "Tuesday"
+    elif day_of_week == 4:
+        weekday = "Wednesday"
+    elif day_of_week == 5:
+        weekday = "Thursday"
+    else:
+        weekday = "Friday"
+    
+    # Print the result
+    print(f"The day of the week is {weekday}.")
+
+main()
